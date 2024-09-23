@@ -15,11 +15,10 @@ func init() {
 }
 
 func main() {
-	args := os.Args[1:]
-	args = append(args, "-c", "--raw-input", "--raw-output", ". as $raw | try fromjson catch $raw")
+	args := []string{"-c", "--raw-input", "--raw-output", ". as $raw | try fromjson catch $raw"}
+	args = append(args, os.Args[1:]...)
 
 	jq := exec.Command("jq", args...)
-
 	jq.Stdin = os.Stdin
 	jq.Stdout = os.Stdout
 	jq.Stderr = os.Stderr
