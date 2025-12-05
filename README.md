@@ -1,10 +1,10 @@
-JQ but safely leaving non-json lines as-is
-
-# Without JQQ
+# With JQ
     tail -f my.log | jq -c --raw-input --raw-output '. as $raw | try fromjson catch $raw'
 
-# With JQQ
+# With alias (add to ~/.bashrc or ~/.zshrc)
+    alias jqq='jq -c --raw-input --raw-output ". as \$raw | try fromjson catch \$raw"'
     tail -f my.log | jqq
-   
-# Install
+    
+# With JQQ (this repo)
     go install github.com/frifox/jqq@latest
+    tail -f my.log | jqq
